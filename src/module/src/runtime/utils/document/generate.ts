@@ -103,6 +103,7 @@ export async function documentFromMarkdownContent(id: string, content: string, o
   const tree = await parse(content, {
     autoClose: false,
     autoUnwrap: true,
+    linkify: false,
     plugins: [
       comarkEmoji(),
       highlight({ themes }),
