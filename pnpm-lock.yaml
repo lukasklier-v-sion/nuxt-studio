@@ -4842,7 +4842,7 @@ packages:
     resolution: {integrity: sha512-Z3UPUKasUVDFCDYAjP2fmlVRf1jFHJv1izAmPjiOa0OCIw1W7iC8PZ2GsoDa8uZv+mKyWopxxStT9q05+27h7w==}
 
   comark@https://pkg.pr.new/comark@c5cfd14:
-    resolution: {tarball: https://pkg.pr.new/comark@c5cfd14}
+    resolution: {integrity: sha512-uljBPBNeZ5pFLdj29Ik2XNyHWwKWheQ6fhNAIS9CLPD0TZAkYbUa+92QtZg9vFPfhHyTVJO4+cbVdxmTnYyuGA==, tarball: https://pkg.pr.new/comark@c5cfd14}
     version: 0.4.0
     peerDependencies:
       beautiful-mermaid: ^1.1.3
