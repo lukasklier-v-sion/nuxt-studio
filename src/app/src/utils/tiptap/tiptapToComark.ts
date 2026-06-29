@@ -293,16 +293,20 @@ function createHeadingElement(node: JSONContent): ComarkElement {
 }
 
 function createCodeBlockElement(node: JSONContent): ComarkElement {
-  const headingEl = createElement(node, 'pre') as ComarkElement
-  const [tag, attrs] = headingEl
-
   const code = node.attrs?.code || getNodeContent(node)
-  const language = node.attrs!.language
-  const filename = node.attrs!.filename
+  const language = node.attrs?.language
+  const filename = node.attrs?.filename
+
+  // Keep `code` and Shiki artifacts (class/tabindex) OFF the `pre`: comark serializes
+  // any surviving `pre` attr as a `::pre{…}` wrapper instead of a plain ``` fence. The
+  // raw source lives in the `code` child, which comark renders the fence body from.
+  const attrs: ComarkElementAttributes = {}
+  if (language) attrs.language = language
+  if (filename) attrs.filename = filename
 
   const codeChild: ComarkElement = ['code', { __ignoreMap: '' }, code as ComarkNode]
 
-  return [tag, { ...attrs as object, code, language, filename }, codeChild] as ComarkElement
+  return ['pre', attrs, codeChild] as ComarkElement
 }
 
 // Boolean video attrs that comark serializes with a `:` prefix (e.g. `:controls: 'true'`).
