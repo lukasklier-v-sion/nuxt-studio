@@ -4,6 +4,7 @@ import { nodeViewProps, NodeViewWrapper, NodeViewContent } from '@tiptap/vue-3'
 import { kebabCase } from 'scule'
 import type { Node as ProseMirrorNode } from '@tiptap/pm/model'
 import { useStudio } from '../../../composables/useStudio'
+import { keepComboboxFocus } from '../../../utils/combobox'
 
 const nodeProps = defineProps(nodeViewProps)
 
@@ -55,12 +56,14 @@ function deleteSlot() {
       <div
         v-if="showSlotSelection"
         class="flex items-center gap-2 mb-2"
+        @mousedown="keepComboboxFocus"
       >
         <USelectMenu
           v-model="slotName"
           :items="availableSlots"
           :disabled="!isEditable"
           :content="{ align: 'start' }"
+          :portal="false"
           :placeholder="$t('studio.tiptap.slot.searchPlaceholder')"
           size="xs"
           :ui="{
